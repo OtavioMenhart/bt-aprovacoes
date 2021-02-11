@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Api.Aprovacoes.Data\Api.Processos.Data.csproj" />
+    <ProjectReference Include="..\Api.Aprovacoes.Domain\Api.Processos.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

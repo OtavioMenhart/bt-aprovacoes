@@ -1,0 +1,1 @@
+dotnet ef dbcontext scaffold "Server=den1.mssql7.gear.host;database=aprovacoesbd;User Id=aprovacoesbd;password=Us4f~-ft2ou7" Microsoft.EntityFrameworkCore.SqlServer --data-annotations -o Context

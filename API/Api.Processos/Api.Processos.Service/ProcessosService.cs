@@ -60,6 +60,8 @@ namespace Api.Processos.Service
                     return new ProcessoResultadoDto { msg = $"Processo {compraProcesso.NumeroProcesso} já foi comprado" };
                 if (!processoSelecionado.FlgAtivo)
                     return new ProcessoResultadoDto { msg = $"Processo {compraProcesso.NumeroProcesso} inativo, você não pode realizar a compra" };
+                if(!compraProcesso.StatusCompra)
+                    return new ProcessoResultadoDto { msg = $"Processo {compraProcesso.NumeroProcesso} não foi comprado" };
 
                 processoSelecionado.FlgAprovado = compraProcesso.StatusCompra;
                 processoSelecionado.DataCompra = DateTime.UtcNow;

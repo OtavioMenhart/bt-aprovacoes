@@ -66,6 +66,29 @@ namespace Api.Processos.Controllers
         }
 
         /// <summary>
+        /// Obter por número do processo
+        /// </summary>
+        /// <param name="numeroProcesso"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("{numeroProcesso}")]
+        public async Task<ActionResult> ObterPorNumeroProcesso(string numeroProcesso)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                return Ok(await _service.ObterPorNumeroProcesso(numeroProcesso));
+            }
+            catch (ArgumentException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Criar processo
         /// </summary>
         /// <param name="aprovacao"></param>

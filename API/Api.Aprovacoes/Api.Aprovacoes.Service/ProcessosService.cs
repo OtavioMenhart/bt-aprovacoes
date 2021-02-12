@@ -32,6 +32,8 @@ namespace Api.Processos.Service
                 TblProcessos processoSelecionado = await _processosRepository.BuscarPorNumeroProcesso(statusProcesso.NumeroProcesso);
                 if (processoSelecionado is null)
                     return new ProcessoResultadoDto { msg = $"Processo {statusProcesso.NumeroProcesso} não localizado" };
+                if (processoSelecionado.FlgAprovado)
+                    return new ProcessoResultadoDto { msg = $"Processo {statusProcesso.NumeroProcesso} já foi comprado, você não pode alterar o status" };
 
                 processoSelecionado.FlgAtivo = statusProcesso.Status;
                 processoSelecionado.DataEdicao = DateTime.UtcNow;
@@ -156,6 +158,18 @@ namespace Api.Processos.Service
             try
             {
                 return await _repository.SelectAsync(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<TblProcessos> ObterPorNumeroProcesso(string numeroProcesso)
+        {
+            try
+            {
+                return await _processosRepository.BuscarPorNumeroProcesso(numeroProcesso);
             }
             catch (Exception)
             {

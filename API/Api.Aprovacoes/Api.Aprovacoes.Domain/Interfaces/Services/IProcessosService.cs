@@ -16,5 +16,6 @@ namespace Api.Processos.Domain.Interfaces.Services
         Task<ProcessoResultadoDto> AlterarStatusProcesso(StatusProcessoDto statusProcesso);
         Task<IEnumerable<TblProcessos>> ObterTodosProcessos();
         Task<ProcessoResultadoDto> AprovarCompra(CompraProcessoDto compraProcesso);
+        Task<TblProcessos> ObterPorNumeroProcesso(string numeroProcesso);
     }
 }

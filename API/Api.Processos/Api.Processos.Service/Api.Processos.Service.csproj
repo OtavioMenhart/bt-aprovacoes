@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Api.Aprovacoes.Data\Api.Processos.Data.csproj" />
-    <ProjectReference Include="..\Api.Aprovacoes.Domain\Api.Processos.Domain.csproj" />
+    <ProjectReference Include="..\Api.Processos.Data\Api.Processos.Data.csproj" />
+    <ProjectReference Include="..\Api.Processos.Domain\Api.Processos.Domain.csproj" />
   </ItemGroup>
 
 </Project>

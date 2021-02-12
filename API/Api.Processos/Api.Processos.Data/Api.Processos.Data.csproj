@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Api.Aprovacoes.Domain\Api.Processos.Domain.csproj" />
+    <ProjectReference Include="..\Api.Processos.Domain\Api.Processos.Domain.csproj" />
   </ItemGroup>
 
 </Project>

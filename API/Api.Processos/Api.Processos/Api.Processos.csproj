@@ -12,9 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Api.Aprovacoes.CrossCutting\Api.Processos.CrossCutting.csproj" />
-    <ProjectReference Include="..\Api.Aprovacoes.Domain\Api.Processos.Domain.csproj" />
-    <ProjectReference Include="..\Api.Aprovacoes.Service\Api.Processos.Service.csproj" />
+    <ProjectReference Include="..\Api.Processos.CrossCutting\Api.Processos.CrossCutting.csproj" />
+    <ProjectReference Include="..\Api.Processos.Domain\Api.Processos.Domain.csproj" />
+    <ProjectReference Include="..\Api.Processos.Service\Api.Processos.Service.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

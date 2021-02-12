@@ -8,16 +8,15 @@
 
   <ItemGroup>
     <PackageReference Include="Faker.NETCore" Version="1.0.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
-    <PackageReference Include="Moq" Version="4.16.0" />
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
     <PackageReference Include="coverlet.collector" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Api.Aprovacoes.Domain\Api.Processos.Domain.csproj" />
-    <ProjectReference Include="..\Api.Aprovacoes.Service\Api.Processos.Service.csproj" />
+    <ProjectReference Include="..\..\Api.Processos.Data\Api.Processos.Data.csproj" />
   </ItemGroup>
 
 </Project>

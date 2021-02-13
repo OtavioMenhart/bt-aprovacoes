@@ -9,11 +9,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Processos.Domain.Entities
 {
-    [Table("TBL_PROCESSOS")]
+    [Table("Tbl_Processos")]
     public partial class TblProcessos
     {
         [Key]
-        [Column("ID")]
+        [Column("Id")]
         public int Id { get; set; }
         [Required]
         [StringLength(12)]

@@ -15,7 +15,7 @@ namespace Api.Processos.CrossCutting.DependencyInjection
         public static void ConfigureDependenciesRepository(IServiceCollection serviceCollection)
         {
             serviceCollection.AddDbContext<DataContext>(
-                options => options.UseSqlServer("Server=den1.mssql7.gear.host;database=aprovacoesbd;User Id=aprovacoesbd;password=Us4f~-ft2ou7")
+                options => options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;database=ProcessosBD;Trusted_Connection=True;")
                 );
             serviceCollection.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             serviceCollection.AddScoped<IProcessosRepository, ProcessosRepository>();

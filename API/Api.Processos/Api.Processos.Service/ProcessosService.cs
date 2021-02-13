@@ -123,6 +123,8 @@ namespace Api.Processos.Service
                 TblProcessos processoSelecionado = await _processosRepository.BuscarPorNumeroProcesso(edicao.NumeroProcesso);
                 if (processoSelecionado is null)
                     return new ProcessoResultadoDto { msg = $"Processo {edicao.NumeroProcesso} não localizado" };
+                if(processoSelecionado.FlgAprovado)
+                    return new ProcessoResultadoDto { msg = $"Processo {edicao.NumeroProcesso} já foi comprado, não pode mais ser editado" };
 
 
                 var resultadoValidacoes = (ValidationResult)await Validacao(edicao, false);

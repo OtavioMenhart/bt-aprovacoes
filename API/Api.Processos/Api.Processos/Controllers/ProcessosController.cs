@@ -34,7 +34,10 @@ namespace Api.Processos.Controllers
             }
             try
             {
-                return Ok(await _service.ObterTodosProcessos());
+                IEnumerable<TblProcessos> processos = await _service.ObterTodosProcessos();
+                if(processos.Count() > 0)
+                    return Ok(processos);
+                return NoContent();
             }
             catch (ArgumentException ex)
             {
@@ -57,7 +60,10 @@ namespace Api.Processos.Controllers
             }
             try
             {
-                return Ok(await _service.ObterPorId(id));
+                TblProcessos processo = await _service.ObterPorId(id);
+                if(processo != null)
+                    return Ok(processo);
+                return NoContent();
             }
             catch (ArgumentException ex)
             {
@@ -80,7 +86,10 @@ namespace Api.Processos.Controllers
             }
             try
             {
-                return Ok(await _service.ObterPorNumeroProcesso(numeroProcesso));
+                TblProcessos processo = await _service.ObterPorNumeroProcesso(numeroProcesso);
+                if(processo != null)
+                    return Ok(processo);
+                return NoContent();
             }
             catch (ArgumentException ex)
             {

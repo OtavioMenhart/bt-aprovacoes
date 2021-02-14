@@ -50,6 +50,10 @@ namespace Api.Integration.Teste.Processos
             Assert.Equal(registroSelecionado.NumeroProcesso, registroPost.processo.NumeroProcesso);
             Assert.Equal(registroSelecionado.NomeReclamante, registroPost.processo.NomeReclamante);
 
+            //ObterPorId - no content
+            response = await client.GetAsync($"{hostApi}Processos/ObterPorId/{Faker.RandomNumber.Next()}");
+            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+
             //ObterPorNumeroProcesso
             response = await client.GetAsync($"{hostApi}Processos/ObterPorNumeroProcesso/{registroPost.processo.NumeroProcesso}");
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -58,6 +62,10 @@ namespace Api.Integration.Teste.Processos
             Assert.NotNull(registroSelecionado);
             Assert.Equal(registroSelecionado.NumeroProcesso, registroPost.processo.NumeroProcesso);
             Assert.Equal(registroSelecionado.NomeReclamante, registroPost.processo.NomeReclamante);
+
+            //ObterPorNumeroProcesso - no content
+            response = await client.GetAsync($"{hostApi}Processos/ObterPorNumeroProcesso/{Faker.RandomNumber.Next().ToString()}");
+            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
 
             //ObterTodosProcessos
             response = await client.GetAsync($"{hostApi}Processos/ObterTodosProcessos");

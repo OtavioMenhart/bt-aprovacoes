@@ -9,6 +9,8 @@ import { MeusProcessosComponent } from './meus-processos/meus-processos.componen
 import {ROUTES} from './app.routes'
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { MeusProcessosService } from './meus-processos/meus-processos.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,9 +22,10 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [MeusProcessosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

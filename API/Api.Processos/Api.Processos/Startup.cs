@@ -26,6 +26,11 @@ namespace Api.Processos
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            });
+
             ConfigureService.ConfigureDependenciesService(services);
             ConfigureRepository.ConfigureDependenciesRepository(services);
 
@@ -43,25 +48,6 @@ namespace Api.Processos
                 var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = System.IO.Path.Combine(AppContext.BaseDirectory, xmlFile);
                 x.IncludeXmlComments(xmlPath);
-                //x.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-                //{
-                //    Description = "Entre com o token JWT",
-                //    Name = "Authorization",
-                //    In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-                //    Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey
-                //});
-
-                //x.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
-                //{{
-                //    new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-                //    {
-                //        Reference = new Microsoft.OpenApi.Models.OpenApiReference
-                //        {
-                //            Id = "Bearer",
-                //            Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme
-                //        }
-                //    }, new List<string>() }
-                //});
             });
         }
 
@@ -73,6 +59,7 @@ namespace Api.Processos
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(options => { options.AllowAnyOrigin(); options.AllowAnyMethod(); options.AllowAnyHeader(); });
             app.UseSwagger();
             app.UseSwaggerUI(x =>
             {
@@ -90,6 +77,7 @@ namespace Api.Processos
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

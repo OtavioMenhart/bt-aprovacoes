@@ -1,5 +1,7 @@
 using Api.Processos.CrossCutting.DependencyInjection;
+using Api.Processos.Hubs;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -26,12 +28,24 @@ namespace Api.Processos
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(c =>
+            services.AddCors(options =>
             {
-                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+                options.AddPolicy("CorsPolicy",
+                    builder =>
+                    {
+                        builder
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .WithOrigins(
+                                "http://localhost:4200")
+                            .AllowCredentials();
+                    });
             });
 
-            ConfigureService.ConfigureDependenciesService(services);
+            services.AddSignalR();
+        
+
+        ConfigureService.ConfigureDependenciesService(services);
             ConfigureRepository.ConfigureDependenciesRepository(services);
 
             services.AddControllers();
@@ -59,7 +73,7 @@ namespace Api.Processos
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(options => { options.AllowAnyOrigin(); options.AllowAnyMethod(); options.AllowAnyHeader(); });
+            app.UseCors("CorsPolicy");
             app.UseSwagger();
             app.UseSwaggerUI(x =>
             {
@@ -76,8 +90,10 @@ namespace Api.Processos
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<LiveChatHub>("/liveChatHub");
             });
 
+            
         }
     }
 }

@@ -1,0 +1,60 @@
+<div #messagesContainer class="messages-container" *ngIf = "liveChatOn">
+    <div class="message" *ngFor="let message of chatMessages" 
+        [class.right-side-message] = "message.type === messageTypeEnumRef.CurrentUserMessage"
+        [class.center-side-message] = "message.type === messageTypeEnumRef.ChatActions">
+
+        <div class="message-content" 
+            [class.message-content-right-side] = "message.type === messageTypeEnumRef.CurrentUserMessage"
+            [class.action-message]="message.type === messageTypeEnumRef.ChatActions">
+            <p> {{ message.content }} </p>
+        </div>
+        <p class="user-name" *ngIf = "message.type !== messageTypeEnumRef.ChatActions"
+            [class.user-name-right-side] = "message.type === messageTypeEnumRef.CurrentUserMessage"> 
+            {{ message.userName }}
+        </p>
+    </div>
+</div>
+
+<div class="new-message-container" *ngIf = "liveChatOn">
+    <div class="leave-chat-btn" (click)="leaveChatAsync()" >
+        <i class="bi bi-box-arrow-left"></i>
+    </div> 
+    <textarea class="new-message-field" #newMessageInput 
+        placeholder="Escreva uma mensagem . . ."
+        (keyup.enter) = "sendNewMessage(newMessageInput)">
+    </textarea>
+    <div class="send-new-message-btn" (click)="sendNewMessage(newMessageInput)" >
+        <i class="bi bi-arrow-right-square"></i>
+    </div> 
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalLoginChat" tabindex="-1" role="dialog" aria-labelledby="modalLoginChatLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLoginChatLabel">Login</h5>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button> -->
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="formularioEntrada" (ngSubmit)="entrarUsuario()">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="userName">Nome do usuário</label>
+                    <input id="userName" class="form-control" formControlName="userName" required>
+                </div>                
+              </div>
+              
+              <button type="submit" class="btn btn-primary">Entrar</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+

@@ -19,10 +19,7 @@
 <table id="tblProcessos" class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th hidden>Id</th>
-            <th>Editar</th>
-            <th>Status do processo</th>
-            <th>Compra</th>
+            
             <th>Número do processo</th>
             <th>Valor da causa</th>
             <th>Escritório</th>
@@ -31,12 +28,22 @@
             <th>Status do processo</th>
             <th>Status de compra</th>
             <th>Data da compra</th>
+            <th>Editar</th>
+            <th>Status</th>
+            <th>Compra</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let p of processos">
-            <td hidden>{{p.id}}</td>
+        <tr *ngFor="let p of processos">           
 
+            <td>{{p.numeroProcesso}}</td>
+            <td>{{p.valorCausa | currency : 'R$'}}</td>
+            <td>{{p.escritorio}}</td>
+            <td>{{p.nomeReclamante}}</td>
+            <td>{{p.dataInclusao}}</td>
+            <td>{{p.flgAtivo ? "Ativo" : "Inativo"}}</td>
+            <td>{{p.flgAprovado ? "Comprado" : "Pendente"}}</td>
+            <td>{{p.dataCompra}}</td>
             <td *ngIf="p.flgAprovado">
                 Processo comprado, não pode ser editado
             </td>
@@ -75,15 +82,6 @@
             <td *ngIf="p.flgAprovado">
                 Processo comprado
             </td>
-
-            <td>{{p.numeroProcesso}}</td>
-            <td>{{p.valorCausa | currency : 'R$'}}</td>
-            <td>{{p.escritorio}}</td>
-            <td>{{p.nomeReclamante}}</td>
-            <td>{{p.dataInclusao}}</td>
-            <td>{{p.flgAtivo ? "Ativo" : "Inativo"}}</td>
-            <td>{{p.flgAprovado ? "Comprado" : "Pendente"}}</td>
-            <td>{{p.dataCompra}}</td>
         </tr>
     </tbody>
 </table>

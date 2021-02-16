@@ -10,7 +10,7 @@ CREATE TABLE Tbl_Processos(
 	FlgAtivo bit NOT NULL,
 	FlgAprovado bit NOT NULL,
 	DataCompra Datetime,
-	CONSTRAINT CHK_ValorCausa CHECK (ValorCausa >=30000),
+	CONSTRAINT CHK_ValorCausa CHECK (ValorCausa > 30000),
 	CONSTRAINT PK_Aprovacao PRIMARY KEY(ID),
 	CONSTRAINT UC_NumeroProcesso UNIQUE (NumeroProcesso)
 )

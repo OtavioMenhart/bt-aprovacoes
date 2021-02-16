@@ -13,6 +13,8 @@ import { MeusProcessosService } from './meus-processos/meus-processos.service';
 import { HttpClientModule } from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms'
 import { ValidacaoService } from './validacoes/processo.validacao.service';
+import { ChatComponent } from './chat/chat.component';
+import { ChatService } from './chat/chat.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { ValidacaoService } from './validacoes/processo.validacao.service';
     HeaderComponent,
     CriarProcessoComponent,
     MeusProcessosComponent,
-    HomeComponent
+    HomeComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,7 @@ import { ValidacaoService } from './validacoes/processo.validacao.service';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [MeusProcessosService, ValidacaoService],
+  providers: [MeusProcessosService, ValidacaoService, ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

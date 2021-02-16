@@ -9,6 +9,7 @@ import { ResultadoValidacao } from '../validacoes/processo.resultadoValidacao';
 import { ValidacaoService } from '../validacoes/processo.validacao.service';
 import { ProcessoInsertEdit } from '../modelos/processoInsertEdit.model';
 import { PesquisaProcesso } from '../modelos/pesquisaProcesso.model';
+import swal from 'sweetalert';
 
 declare var $: any
 
@@ -94,7 +95,7 @@ export class MeusProcessosComponent implements OnInit {
 
   editarProcesso(){
     this.processoEdicao = Object.assign(new ProcessoInsertEdit(), this.processoForm.value)
-
+    
     this.resultadoValidacao = this.validacaoService.validar(this.processoEdicao)
 
     if(this.resultadoValidacao.status){
@@ -112,9 +113,14 @@ export class MeusProcessosComponent implements OnInit {
 
     this.meusProcessosService.pesquisarPorNumeroProcesso(this.pesquisaProcesso.NumeroProcessoPesquisa).toPromise().then(
       resultado =>{
-        this.processos = []
-        this.processos.push(resultado)
-        this.pesquisarProcessoForm.reset()
+        if(resultado != null){
+          this.processos = []
+          this.processos.push(resultado)
+          this.pesquisarProcessoForm.reset()
+        }else{
+          swal("Ops!", "Processo não encontrado", "info");
+        }
+        
     })
     
   }

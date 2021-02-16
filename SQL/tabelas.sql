@@ -14,3 +14,7 @@ CREATE TABLE Tbl_Processos(
 	CONSTRAINT PK_Aprovacao PRIMARY KEY(ID),
 	CONSTRAINT UC_NumeroProcesso UNIQUE (NumeroProcesso)
 )
+
+
+ALTER TABLE Tbl_Processos
+ADD CONSTRAINT CHK_NumeroProcesso CHECK (LEN(NumeroProcesso) = 12);

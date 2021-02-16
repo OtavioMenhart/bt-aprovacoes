@@ -1,2 +1,23 @@
-
-<p>criar-processo works!</p>
+<form [formGroup]="processoForm" (ngSubmit)="criarProcesso()">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+          <label for="numeroProcesso">Número do processo</label>
+          <input id="numeroProcesso" class="form-control" formControlName="NumeroProcesso"  onkeyup="this.value=this.value.replace(/[^\d]/,'')" required minlength="12" maxlength="12">
+      </div>
+      <div class="form-group col-md-6">
+          <label for="valorCausa">Valor da causa</label>
+          <input id="valorCausa" class="form-control" formControlName="ValorCausa" step=".01" type="number" min="30001" required>
+      </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="escritorio">Escritório</label>
+          <input id="escritorio" class="form-control" formControlName="Escritorio" minlength="1" maxlength="50" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="reclamante">Reclamante</label>
+          <input id="reclamante" class="form-control" formControlName="NomeReclamante" minlength="1" maxlength="100" required>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Criar processo</button>
+</form>

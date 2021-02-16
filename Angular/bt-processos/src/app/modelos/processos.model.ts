@@ -1,12 +1,12 @@
 export class Processos{
-    Id: number;
-    NumeroProcesso: string;
-    ValorCausa: number;
-    Escritorio: string;
-    NomeReclamante: string;
-    DataInclusao: Date;
-    DataEdicao: Date;
-    FlgAtivo: boolean;
-    FlgAprovado: boolean;
-    DataCompra: Date;
+    id: number;
+    numeroProcesso: string;
+    valorCausa: number;
+    escritorio: string;
+    nomeReclamante: string;
+    dataInclusao: Date;
+    dataEdicao: Date;
+    flgAtivo: boolean;
+    flgAprovado: boolean;
+    dataCompra: Date;
 }

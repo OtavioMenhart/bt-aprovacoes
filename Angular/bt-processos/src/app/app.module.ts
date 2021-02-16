@@ -11,6 +11,8 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MeusProcessosService } from './meus-processos/meus-processos.service';
 import { HttpClientModule } from '@angular/common/http';
+import {ReactiveFormsModule} from '@angular/forms'
+import { ValidacaoService } from './validacoes/processo.validacao.service';
 
 @NgModule({
   declarations: [
@@ -23,9 +25,10 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     RouterModule.forRoot(ROUTES),
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [MeusProcessosService],
+  providers: [MeusProcessosService, ValidacaoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

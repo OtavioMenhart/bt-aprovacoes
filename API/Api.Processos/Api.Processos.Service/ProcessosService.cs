@@ -82,6 +82,8 @@ namespace Api.Processos.Service
         {
             try
             {
+                processo.Escritorio =  Regex.Replace(processo.Escritorio, @"[\d-]", string.Empty).Trim();
+                processo.NomeReclamante = Regex.Replace(processo.NomeReclamante, @"[\d-]", string.Empty).Trim();
 
                 var resultadoValidacoes = (ValidationResult)await Validacao(processo, true);
 
@@ -92,6 +94,7 @@ namespace Api.Processos.Service
                         msg = resultadoValidacoes.ToString(" | ")
                     };
                 }
+
 
                 TblProcessos baseAprovacao = new TblProcessos
                 {
@@ -126,6 +129,8 @@ namespace Api.Processos.Service
                 if(processoSelecionado.FlgAprovado)
                     return new ProcessoResultadoDto { msg = $"Processo {edicao.NumeroProcesso} já foi comprado, não pode mais ser editado" };
 
+                edicao.Escritorio = Regex.Replace(edicao.Escritorio, @"[\d-]", string.Empty).Trim();
+                edicao.NomeReclamante = Regex.Replace(edicao.NomeReclamante, @"[\d-]", string.Empty).Trim();
 
                 var resultadoValidacoes = (ValidationResult)await Validacao(edicao, false);
 

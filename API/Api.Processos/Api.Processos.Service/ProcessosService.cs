@@ -8,7 +8,6 @@ using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -56,11 +55,11 @@ namespace Api.Processos.Service
                 TblProcessos processoSelecionado = await _processosRepository.BuscarPorNumeroProcesso(compraProcesso.NumeroProcesso);
                 if (processoSelecionado is null)
                     return new ProcessoResultadoDto { msg = $"Processo {compraProcesso.NumeroProcesso} não localizado" };
-                if(processoSelecionado.FlgAprovado)
+                if (processoSelecionado.FlgAprovado)
                     return new ProcessoResultadoDto { msg = $"Processo {compraProcesso.NumeroProcesso} já foi comprado" };
                 if (!processoSelecionado.FlgAtivo)
                     return new ProcessoResultadoDto { msg = $"Processo {compraProcesso.NumeroProcesso} inativo, você não pode realizar a compra" };
-                if(!compraProcesso.StatusCompra)
+                if (!compraProcesso.StatusCompra)
                     return new ProcessoResultadoDto { msg = $"Processo {compraProcesso.NumeroProcesso} não foi comprado" };
 
                 processoSelecionado.FlgAprovado = compraProcesso.StatusCompra;
@@ -82,7 +81,7 @@ namespace Api.Processos.Service
         {
             try
             {
-                processo.Escritorio =  Regex.Replace(processo.Escritorio, @"[\d-]", string.Empty).Trim();
+                processo.Escritorio = Regex.Replace(processo.Escritorio, @"[\d-]", string.Empty).Trim();
                 processo.NomeReclamante = Regex.Replace(processo.NomeReclamante, @"[\d-]", string.Empty).Trim();
 
                 var resultadoValidacoes = (ValidationResult)await Validacao(processo, true);
@@ -126,7 +125,7 @@ namespace Api.Processos.Service
                 TblProcessos processoSelecionado = await _processosRepository.BuscarPorNumeroProcesso(edicao.NumeroProcesso);
                 if (processoSelecionado is null)
                     return new ProcessoResultadoDto { msg = $"Processo {edicao.NumeroProcesso} não localizado" };
-                if(processoSelecionado.FlgAprovado)
+                if (processoSelecionado.FlgAprovado)
                     return new ProcessoResultadoDto { msg = $"Processo {edicao.NumeroProcesso} já foi comprado, não pode mais ser editado" };
 
                 edicao.Escritorio = Regex.Replace(edicao.Escritorio, @"[\d-]", string.Empty).Trim();
@@ -190,7 +189,8 @@ namespace Api.Processos.Service
         {
             try
             {
-                return await _repository.SelectAsync();
+                IEnumerable<TblProcessos> processos = await _repository.SelectAsync();
+                return processos.OrderByDescending(x => x.NumeroProcesso);
             }
             catch (Exception)
             {

@@ -15,6 +15,8 @@ import {ReactiveFormsModule} from '@angular/forms'
 import { ValidacaoService } from './validacoes/processo.validacao.service';
 import { ChatComponent } from './chat/chat.component';
 import { ChatService } from './chat/chat.service';
+import { NgxMaskModule } from 'ngx-mask';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { ChatService } from './chat/chat.service';
     BrowserModule,
     RouterModule.forRoot(ROUTES),
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot(),
+    DataTablesModule 
   ],
   providers: [MeusProcessosService, ValidacaoService, ChatService],
   bootstrap: [AppComponent]

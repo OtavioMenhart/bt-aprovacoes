@@ -4,9 +4,6 @@ using Api.Processos.Domain.Interfaces;
 using Api.Processos.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Api.Processos.CrossCutting.DependencyInjection
 {

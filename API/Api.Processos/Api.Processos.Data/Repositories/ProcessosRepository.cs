@@ -3,8 +3,6 @@ using Api.Processos.Domain.Entities;
 using Api.Processos.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Api.Processos.Data.Repositories

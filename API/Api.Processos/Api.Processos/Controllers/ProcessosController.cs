@@ -1,7 +1,6 @@
 ﻿using Api.Processos.Domain.Dtos;
 using Api.Processos.Domain.Entities;
 using Api.Processos.Domain.Interfaces.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -35,7 +34,7 @@ namespace Api.Processos.Controllers
             try
             {
                 IEnumerable<TblProcessos> processos = await _service.ObterTodosProcessos();
-                if(processos.Count() > 0)
+                if (processos.Count() > 0)
                     return Ok(processos);
                 return NoContent();
             }
@@ -61,7 +60,7 @@ namespace Api.Processos.Controllers
             try
             {
                 TblProcessos processo = await _service.ObterPorId(id);
-                if(processo != null)
+                if (processo != null)
                     return Ok(processo);
                 return NoContent();
             }
@@ -87,7 +86,7 @@ namespace Api.Processos.Controllers
             try
             {
                 TblProcessos processo = await _service.ObterPorNumeroProcesso(numeroProcesso);
-                if(processo != null)
+                if (processo != null)
                     return Ok(processo);
                 return NoContent();
             }
@@ -121,7 +120,7 @@ namespace Api.Processos.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
         }
-    
+
         /// <summary>
         /// Editar valor, escritório ou reclamante
         /// </summary>

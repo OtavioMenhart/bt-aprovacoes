@@ -16,7 +16,7 @@ namespace Api.Service.Teste.Processos
 
         [Fact(DisplayName = "É possível criar processo")]
         public async Task E_Possivel_Criar_Processo()
-        {            
+        {
             _serviceMock = new Mock<IProcessosService>();
             _serviceMock.Setup(x => x.CriarProcesso(processoDtoCreate)).ReturnsAsync(resultadoDtoSucesso);
             _service = _serviceMock.Object;

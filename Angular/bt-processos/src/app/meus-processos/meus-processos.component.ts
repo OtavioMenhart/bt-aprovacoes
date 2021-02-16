@@ -32,9 +32,13 @@ export class MeusProcessosComponent implements OnInit {
 
   resultadoValidacao: ResultadoValidacao
 
+  dtOptions: DataTables.Settings = {};
+
   constructor(private meusProcessosService: MeusProcessosService, private formBuilder: FormBuilder, private validacaoService: ValidacaoService) { }
 
   ngOnInit(): void {
+    
+    this.opcoesDatatable()
     this.processoForm = this.formBuilder.group({
       NumeroProcesso: '',
       ValorCausa: '',
@@ -43,10 +47,21 @@ export class MeusProcessosComponent implements OnInit {
     });
     this.pesquisarProcessoForm = this.formBuilder.group({
       NumeroProcessoPesquisa: ''
-    })
+    });
     this.carregarProcessos()    
   }
+
+  opcoesDatatable(){
+    this.dtOptions = {
+      destroy: true,
+      pageLength: 5,
+      processing: true,
+      lengthMenu: [5, 10, 20, 50, 100, 200, 500]
+    }
+  }
+
   carregarProcessos() {
+    this.opcoesDatatable()
     this.meusProcessosService.selecionarTodosProcessos().toPromise().then(processos => 
       {
         this.processos = processos        
@@ -83,10 +98,11 @@ export class MeusProcessosComponent implements OnInit {
   }
 
   abrirModal(processo: Processos){
-    $('#modalDetalheProcesso').modal('show'); 
+    $('#modalDetalheProcesso').modal('show');
+    
     this.processoForm = this.formBuilder.group({
       NumeroProcesso: processo.numeroProcesso,
-      ValorCausa: processo.valorCausa,
+      ValorCausa: processo.valorCausa.toString().replace(".", ","),
       Escritorio: processo.escritorio,
       NomeReclamante: processo.nomeReclamante
     });
@@ -95,6 +111,7 @@ export class MeusProcessosComponent implements OnInit {
 
   editarProcesso(){
     this.processoEdicao = Object.assign(new ProcessoInsertEdit(), this.processoForm.value)
+    this.processoEdicao.ValorCausa = Number(this.processoEdicao.ValorCausa)
     
     this.resultadoValidacao = this.validacaoService.validar(this.processoEdicao)
 

@@ -35,8 +35,8 @@ namespace Api.Service.Teste.Processos
             Escritorio = Faker.Company.Name();
 
             for (int i = 0; i < 10; i++)
-            {                
-                listaProcessos.Add(new TblProcessos 
+            {
+                listaProcessos.Add(new TblProcessos
                 {
                     Escritorio = Faker.Company.Name(),
                     NomeReclamante = Faker.Name.FullName(),

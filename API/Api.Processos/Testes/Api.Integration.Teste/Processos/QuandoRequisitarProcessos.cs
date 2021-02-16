@@ -20,7 +20,7 @@ namespace Api.Integration.Teste.Processos
         public async Task E_Possivel_Realizar_Requisicoes_Processos()
         {
             _nomeReclamante = Faker.Name.FullName();
-            _numeroProcesso = Faker.RandomNumber.Next().ToString();
+            _numeroProcesso = new Random().Next().ToString().PadLeft(12, '0');
 
             ProcessoDto entity = new ProcessoDto
             {
@@ -98,7 +98,7 @@ namespace Api.Integration.Teste.Processos
 
             ProcessoResultadoDto registroAtualizadoStatus;
             //AlterarStatusProcesso - inativar
-            stringContent = new StringContent(JsonConvert.SerializeObject(new StatusProcessoDto {NumeroProcesso = _numeroProcesso, Status = false }),
+            stringContent = new StringContent(JsonConvert.SerializeObject(new StatusProcessoDto { NumeroProcesso = _numeroProcesso, Status = false }),
                                     Encoding.UTF8, "application/json");
             response = await client.PatchAsync($"{hostApi}Processos/AlterarStatusProcesso", stringContent);
             jsonResult = await response.Content.ReadAsStringAsync();

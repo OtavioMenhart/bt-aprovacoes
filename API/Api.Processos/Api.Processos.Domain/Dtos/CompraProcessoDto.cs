@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Api.Processos.Domain.Dtos
+﻿namespace Api.Processos.Domain.Dtos
 {
     public class CompraProcessoDto
     {

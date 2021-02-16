@@ -7,6 +7,7 @@
           <h5 class="card-title">Cadastro de processos</h5>
           <p class="card-text">Aqui você poderá criar novos processos informando número do processo, valor da causa,
             escritório e nome do reclamante</p>
+            <a class="btn btn-primary" [routerLink]="['/criar-processo']">Ir</a>
         </div>
       </div>
     </div>
@@ -18,6 +19,7 @@
         <div class="card-body">
           <h5 class="card-title">Meus processos</h5>
           <p class="card-text">Aqui você terá uma listagem dos seus processos e poderá ativar/inativar, determinar compra e editar</p>
+          <a class="btn btn-primary" [routerLink]="['/meus-processos']">Ir</a>
         </div>
       </div>
     </div>
@@ -29,7 +31,9 @@
         <div class="card-body">
           <h5 class="card-title">Chat</h5>
           <p class="card-text">Aqui você poderá interagir com outras pessoas através de um chat em tempo real, aproveite para avaliar as situações dos processos</p>
+          <a class="btn btn-primary" [routerLink]="['/chat']">Ir</a>
         </div>
+        
       </div>
     </div>
   </div>

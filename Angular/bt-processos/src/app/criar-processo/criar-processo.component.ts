@@ -29,7 +29,9 @@ export class CriarProcessoComponent implements OnInit {
   }
 
   criarProcesso(){
+    
     this.processoCriacao = Object.assign(new ProcessoInsertEdit(), this.processoForm.value)
+    this.processoCriacao.ValorCausa = Number(this.processoCriacao.ValorCausa)
     this.resultadoValidacao = this.validacaoService.validar(this.processoCriacao)
 
     if(this.resultadoValidacao.status){

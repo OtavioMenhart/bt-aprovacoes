@@ -1,7 +1,5 @@
-﻿using System;
-using Api.Processos.Domain.Entities;
+﻿using Api.Processos.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -22,7 +20,7 @@ namespace Api.Processos.Data.Context
 
         public virtual DbSet<TblProcessos> TblProcessos { get; set; }
 
-        
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

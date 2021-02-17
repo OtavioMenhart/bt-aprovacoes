@@ -10,19 +10,18 @@ namespace Api.Service.Teste.Processos
 {
     public class QuandoForExecutadoObterPorNumeroProcesso : BaseProcessosTestes
     {
-        private IProcessosService _service;
-        private Mock<IProcessosService> _serviceMock;
+        private IProcessoService _service;
+        private Mock<IProcessoService> _serviceMock;
 
         [Fact(DisplayName = "É possível obter processo por número do processo")]
         public async Task E_Possivel_Obter_Processo_Por_Numero_Processo()
         {
-            _serviceMock = new Mock<IProcessosService>();
+            _serviceMock = new Mock<IProcessoService>();
             _serviceMock.Setup(x => x.ObterPorNumeroProcesso(NumeroProcesso)).ReturnsAsync(tblProcessos);
             _service = _serviceMock.Object;
 
             var result = await _service.ObterPorNumeroProcesso(NumeroProcesso);
             Assert.NotNull(result);
-            Assert.True(result.Id == Id);
             Assert.Equal(result.NumeroProcesso, NumeroProcesso);
         }
     }

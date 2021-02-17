@@ -1,5 +1,4 @@
 ﻿using Api.Processos.Domain.Dtos;
-using Api.Processos.Domain.Entities;
 using Api.Processos.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,11 +11,11 @@ namespace Api.Processos.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class ProcessosController : ControllerBase
+    public class ProcessoController : ControllerBase
     {
-        private IProcessosService _service;
+        private IProcessoService _service;
 
-        public ProcessosController(IProcessosService service)
+        public ProcessoController(IProcessoService service)
         {
             _service = service;
         }
@@ -33,35 +32,9 @@ namespace Api.Processos.Controllers
             }
             try
             {
-                IEnumerable<Processo> processos = await _service.ObterTodosProcessos();
+                IEnumerable<ProcessoRetornoDto> processos = await _service.ObterTodosProcessos();
                 if (processos.Count() > 0)
                     return Ok(processos);
-                return NoContent();
-            }
-            catch (ArgumentException ex)
-            {
-                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Obter processo por Id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("{id}", Name = "ObterPorId")]
-        public async Task<ActionResult> ObterPorId(int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            try
-            {
-                Processo processo = await _service.ObterPorId(id);
-                if (processo != null)
-                    return Ok(processo);
                 return NoContent();
             }
             catch (ArgumentException ex)
@@ -76,7 +49,7 @@ namespace Api.Processos.Controllers
         /// <param name="numeroProcesso"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("{numeroProcesso}")]
+        [Route("{numeroProcesso}", Name = "ObterPorNumeroProcesso")]
         public async Task<ActionResult> ObterPorNumeroProcesso(string numeroProcesso)
         {
             if (!ModelState.IsValid)
@@ -85,7 +58,7 @@ namespace Api.Processos.Controllers
             }
             try
             {
-                Processo processo = await _service.ObterPorNumeroProcesso(numeroProcesso);
+                ProcessoRetornoDto processo = await _service.ObterPorNumeroProcesso(numeroProcesso);
                 if (processo != null)
                     return Ok(processo);
                 return NoContent();
@@ -112,7 +85,7 @@ namespace Api.Processos.Controllers
             {
                 ProcessoResultadoDto result = await _service.CriarProcesso(aprovacao);
                 if (result.processo != null)
-                    return Created(new Uri(Url.Link("ObterPorId", new { id = result.processo.Id })), result);
+                    return Created(new Uri(Url.Link("ObterPorNumeroProcesso", new { numeroProcesso = result.processo.NumeroProcesso })), result);
                 return BadRequest(result);
             }
             catch (ArgumentException ex)

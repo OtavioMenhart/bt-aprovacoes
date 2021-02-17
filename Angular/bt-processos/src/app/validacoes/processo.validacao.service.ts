@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ResultadoValidacao } from './processo.resultadoValidacao';
 import swal from 'sweetalert';
 import { ProcessoInsertEdit } from '../modelos/processoInsertEdit.model';
+import { erroEscritorioVazio, erroNumeroProcessoVazio, erroReclamanteVazio, erroTamanhoCaracteresEscritorio, erroTamanhoCaracteresNumeroProcesso, erroTamanhoCaracteresReclamante, erroValorCausaMinimo, paramatroMinimoValor, parametroMaximoEscritorio, parametroMaximoReclamante, parametroTamanhoCaracteresNumeroProcesso } from './processo.constValidacao';
 
 @Injectable({
   providedIn: 'root'
@@ -15,39 +16,39 @@ export class ValidacaoService {
   validar(processoValidar: ProcessoInsertEdit): ResultadoValidacao{
     if(this.validaVazio(processoValidar.NumeroProcesso)){
         this.resultado.status = false;
-        this.resultado.msg = "Número do processo é obrigatório"
+        this.resultado.msg = erroNumeroProcessoVazio
         swal("Ops!", this.resultado.msg, "info");
         return this.resultado
     }
-    if(processoValidar.NumeroProcesso.length != 12){
+    if(processoValidar.NumeroProcesso.length != parametroTamanhoCaracteresNumeroProcesso){
         this.resultado.status = false;
-        this.resultado.msg = "Número do processo deve ser um campo de 12 caracteres"
+        this.resultado.msg = erroTamanhoCaracteresNumeroProcesso
         swal("Ops!", this.resultado.msg, "info");
         return this.resultado
     }
 
     if(this.validaVazio(processoValidar.Escritorio)){
         this.resultado.status = false;
-        this.resultado.msg = "Escritório é obrigatório"
+        this.resultado.msg = erroEscritorioVazio
         swal("Ops!", this.resultado.msg, "info");
         return this.resultado
     }
-    if(processoValidar.Escritorio.length > 50){
+    if(processoValidar.Escritorio.length > parametroMaximoEscritorio){
         this.resultado.status = false;
-        this.resultado.msg = "Escritório tem limite de 50 caracteres"
+        this.resultado.msg = erroTamanhoCaracteresEscritorio
         swal("Ops!", this.resultado.msg, "info");
         return this.resultado
     }
 
     if(this.validaVazio(processoValidar.NomeReclamante)){
         this.resultado.status = false;
-        this.resultado.msg = "Nome do reclamante é obrigatório"
+        this.resultado.msg = erroReclamanteVazio
         swal("Ops!", this.resultado.msg, "info");
         return this.resultado
     }
-    if(processoValidar.NomeReclamante.length > 100){
+    if(processoValidar.NomeReclamante.length > parametroMaximoReclamante){
         this.resultado.status = false;
-        this.resultado.msg = "Nome do reclamante tem limite de 100"
+        this.resultado.msg = erroTamanhoCaracteresReclamante
         swal("Ops!", this.resultado.msg, "info");
         return this.resultado
     }
@@ -59,9 +60,9 @@ export class ValidacaoService {
         swal("Ops!", this.resultado.msg, "info");
         return this.resultado
     }
-    if(processoValidar.ValorCausa <= 30000){
+    if(processoValidar.ValorCausa <= paramatroMinimoValor){
         this.resultado.status = false;
-        this.resultado.msg = "Valor da causa deve ser maior que R$ 30.000,00"
+        this.resultado.msg = erroValorCausaMinimo
         swal("Ops!", this.resultado.msg, "info");
         return this.resultado
     }

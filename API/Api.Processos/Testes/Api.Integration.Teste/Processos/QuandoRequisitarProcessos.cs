@@ -31,7 +31,7 @@ namespace Api.Integration.Teste.Processos
             };
 
             //CriarProcesso
-            var response = await PostJsonAsync(entity, $"{hostApi}Processos/CriarProcesso", client);
+            var response = await PostJsonAsync(entity, $"{hostApi}Processo/CriarProcesso", client);
             var postResult = await response.Content.ReadAsStringAsync();
             var registroPost = JsonConvert.DeserializeObject<ProcessoResultadoDto>(postResult);
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
@@ -41,21 +41,8 @@ namespace Api.Integration.Teste.Processos
             string jsonResult = "";
             Processo registroSelecionado = null;
 
-            //ObterPorId
-            response = await client.GetAsync($"{hostApi}Processos/ObterPorId/{registroPost.processo.Id}");
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            jsonResult = await response.Content.ReadAsStringAsync();
-            registroSelecionado = JsonConvert.DeserializeObject<Processo>(jsonResult);
-            Assert.NotNull(registroSelecionado);
-            Assert.Equal(registroSelecionado.NumeroProcesso, registroPost.processo.NumeroProcesso);
-            Assert.Equal(registroSelecionado.NomeReclamante, registroPost.processo.NomeReclamante);
-
-            //ObterPorId - no content
-            response = await client.GetAsync($"{hostApi}Processos/ObterPorId/{Faker.RandomNumber.Next()}");
-            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
-
             //ObterPorNumeroProcesso
-            response = await client.GetAsync($"{hostApi}Processos/ObterPorNumeroProcesso/{registroPost.processo.NumeroProcesso}");
+            response = await client.GetAsync($"{hostApi}Processo/ObterPorNumeroProcesso/{registroPost.processo.NumeroProcesso}");
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             jsonResult = await response.Content.ReadAsStringAsync();
             registroSelecionado = JsonConvert.DeserializeObject<Processo>(jsonResult);
@@ -64,11 +51,11 @@ namespace Api.Integration.Teste.Processos
             Assert.Equal(registroSelecionado.NomeReclamante, registroPost.processo.NomeReclamante);
 
             //ObterPorNumeroProcesso - no content
-            response = await client.GetAsync($"{hostApi}Processos/ObterPorNumeroProcesso/{Faker.RandomNumber.Next().ToString()}");
+            response = await client.GetAsync($"{hostApi}Processo/ObterPorNumeroProcesso/{Faker.RandomNumber.Next().ToString()}");
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
 
             //ObterTodosProcessos
-            response = await client.GetAsync($"{hostApi}Processos/ObterTodosProcessos");
+            response = await client.GetAsync($"{hostApi}Processo/ObterTodosProcessos");
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             jsonResult = await response.Content.ReadAsStringAsync();
             var registros = JsonConvert.DeserializeObject<List<Processo>>(jsonResult);
@@ -88,7 +75,7 @@ namespace Api.Integration.Teste.Processos
             //EditarProcesso
             stringContent = new StringContent(JsonConvert.SerializeObject(entityUpdate),
                                     Encoding.UTF8, "application/json");
-            response = await client.PatchAsync($"{hostApi}Processos/EditarProcesso", stringContent);
+            response = await client.PatchAsync($"{hostApi}Processo/EditarProcesso", stringContent);
             jsonResult = await response.Content.ReadAsStringAsync();
             var registroAtualizado = JsonConvert.DeserializeObject<ProcessoResultadoDto>(jsonResult);
 
@@ -100,7 +87,7 @@ namespace Api.Integration.Teste.Processos
             //AlterarStatusProcesso - inativar
             stringContent = new StringContent(JsonConvert.SerializeObject(new StatusProcessoDto { NumeroProcesso = _numeroProcesso, Status = false }),
                                     Encoding.UTF8, "application/json");
-            response = await client.PatchAsync($"{hostApi}Processos/AlterarStatusProcesso", stringContent);
+            response = await client.PatchAsync($"{hostApi}Processo/AlterarStatusProcesso", stringContent);
             jsonResult = await response.Content.ReadAsStringAsync();
             registroAtualizadoStatus = JsonConvert.DeserializeObject<ProcessoResultadoDto>(jsonResult);
 
@@ -110,7 +97,7 @@ namespace Api.Integration.Teste.Processos
             //AlterarStatusProcesso - ativar
             stringContent = new StringContent(JsonConvert.SerializeObject(new StatusProcessoDto { NumeroProcesso = _numeroProcesso, Status = true }),
                                     Encoding.UTF8, "application/json");
-            response = await client.PatchAsync($"{hostApi}Processos/AlterarStatusProcesso", stringContent);
+            response = await client.PatchAsync($"{hostApi}Processo/AlterarStatusProcesso", stringContent);
             jsonResult = await response.Content.ReadAsStringAsync();
             registroAtualizadoStatus = JsonConvert.DeserializeObject<ProcessoResultadoDto>(jsonResult);
 
@@ -120,7 +107,7 @@ namespace Api.Integration.Teste.Processos
             //AprovarCompra
             stringContent = new StringContent(JsonConvert.SerializeObject(new CompraProcessoDto { NumeroProcesso = _numeroProcesso, StatusCompra = true }),
                                     Encoding.UTF8, "application/json");
-            response = await client.PatchAsync($"{hostApi}Processos/AprovarCompra", stringContent);
+            response = await client.PatchAsync($"{hostApi}Processo/AprovarCompra", stringContent);
             jsonResult = await response.Content.ReadAsStringAsync();
             registroAtualizadoStatus = JsonConvert.DeserializeObject<ProcessoResultadoDto>(jsonResult);
 

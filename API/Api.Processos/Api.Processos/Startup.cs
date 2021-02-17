@@ -1,5 +1,7 @@
 using Api.Processos.CrossCutting.DependencyInjection;
+using Api.Processos.CrossCutting.Mappings;
 using Api.Processos.Hubs;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -40,6 +42,13 @@ namespace Api.Processos
 
             ConfigureService.ConfigureDependenciesService(services);
             ConfigureRepository.ConfigureDependenciesRepository(services);
+
+            var config = new MapperConfiguration(cfg => {
+                cfg.AddProfile(new EntidadeParaDto());
+            });
+
+            IMapper mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
 
             services.AddControllers();
             services.AddSwaggerGen(x =>

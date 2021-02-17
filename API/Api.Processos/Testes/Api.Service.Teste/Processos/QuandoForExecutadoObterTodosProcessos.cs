@@ -11,13 +11,13 @@ namespace Api.Service.Teste.Processos
 {
     public class QuandoForExecutadoObterTodosProcessos : BaseProcessosTestes
     {
-        private IProcessosService _service;
-        private Mock<IProcessosService> _serviceMock;
+        private IProcessoService _service;
+        private Mock<IProcessoService> _serviceMock;
 
         [Fact(DisplayName = "É possível obter todos os processos")]
         public async Task E_Possivel_Obter_Todos_Processos()
         {
-            _serviceMock = new Mock<IProcessosService>();
+            _serviceMock = new Mock<IProcessoService>();
             _serviceMock.Setup(x => x.ObterTodosProcessos()).ReturnsAsync(listaProcessos);
             _service = _serviceMock.Object;
 

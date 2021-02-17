@@ -23,23 +23,23 @@ httpOptions = {
 }
 
   selecionarTodosProcessos(): Observable<Processos[]>{
-    return this.http.get<Processos[]>(`${URL_API}/Processos/ObterTodosProcessos`).pipe(catchError(ErrorHandler.handleError))
+    return this.http.get<Processos[]>(`${URL_API}/Processo/ObterTodosProcessos`).pipe(catchError(ErrorHandler.handleError))
   }
 
   aprovarCompraProcesso(compra: AprovarCompra): Observable<ProcessoResultado>{
-    return this.http.patch<ProcessoResultado>(`${URL_API}/Processos/AprovarCompra`, JSON.stringify(compra), this.httpOptions).pipe(catchError(ErrorHandler.handleError))
+    return this.http.patch<ProcessoResultado>(`${URL_API}/Processo/AprovarCompra`, JSON.stringify(compra), this.httpOptions).pipe(catchError(ErrorHandler.handleError))
   }
 
   alterarStatusProcesso(alteracao: AlterarStatusProcesso): Observable<ProcessoResultado>{
-    return this.http.patch<ProcessoResultado>(`${URL_API}/Processos/AlterarStatusProcesso`, JSON.stringify(alteracao), this.httpOptions).pipe(catchError(ErrorHandler.handleError))
+    return this.http.patch<ProcessoResultado>(`${URL_API}/Processo/AlterarStatusProcesso`, JSON.stringify(alteracao), this.httpOptions).pipe(catchError(ErrorHandler.handleError))
   }
 
   editarProcesso(processoEditado: ProcessoInsertEdit): Observable<ProcessoResultado>{
-    return this.http.patch<ProcessoResultado>(`${URL_API}/Processos/EditarProcesso`, JSON.stringify(processoEditado), this.httpOptions).pipe(catchError(ErrorHandler.handleError))
+    return this.http.patch<ProcessoResultado>(`${URL_API}/Processo/EditarProcesso`, JSON.stringify(processoEditado), this.httpOptions).pipe(catchError(ErrorHandler.handleError))
   }
 
   pesquisarPorNumeroProcesso(numeroProcesso: string): Observable<Processos>{
-    return this.http.get<Processos>(`${URL_API}/Processos/ObterPorNumeroProcesso/${numeroProcesso}`).pipe(catchError(ErrorHandler.handleError))
+    return this.http.get<Processos>(`${URL_API}/Processo/ObterPorNumeroProcesso/${numeroProcesso}`).pipe(catchError(ErrorHandler.handleError))
   }
 
 }

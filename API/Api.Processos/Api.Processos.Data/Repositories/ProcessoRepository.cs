@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Api.Processos.Data.Repositories
 {
-    public class ProcessosRepository : BaseRepository<Processo>, IProcessosRepository
+    public class ProcessoRepository : BaseRepository<Processo>, IProcessoRepository
     {
         private DbSet<Processo> _dataSet;
-        public ProcessosRepository(DataContext context) : base(context)
+        public ProcessoRepository(DataContext context) : base(context)
         {
             _dataSet = context.Set<Processo>();
         }

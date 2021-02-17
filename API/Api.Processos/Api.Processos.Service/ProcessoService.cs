@@ -4,6 +4,7 @@ using Api.Processos.Domain.Interfaces;
 using Api.Processos.Domain.Interfaces.Repositories;
 using Api.Processos.Domain.Interfaces.Services;
 using Api.Processos.Service.Validacoes;
+using AutoMapper;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
@@ -13,15 +14,17 @@ using System.Threading.Tasks;
 
 namespace Api.Processos.Service
 {
-    public class ProcessosService : IProcessosService
+    public class ProcessoService : IProcessoService
     {
         private IRepository<Processo> _repository;
-        private IProcessosRepository _processosRepository;
+        private IProcessoRepository _processosRepository;
+        private readonly IMapper _mapper;
 
-        public ProcessosService(IRepository<Processo> repository, IProcessosRepository ProcessosRepository)
+        public ProcessoService(IRepository<Processo> repository, IProcessoRepository processosRepository, IMapper mapper)
         {
             _repository = repository;
-            _processosRepository = ProcessosRepository;
+            _processosRepository = processosRepository;
+            _mapper = mapper;
         }
 
         public async Task<ProcessoResultadoDto> AlterarStatusProcesso(StatusProcessoDto statusProcesso)
@@ -39,7 +42,7 @@ namespace Api.Processos.Service
                 return new ProcessoResultadoDto
                 {
                     msg = "Sucesso",
-                    processo = await _repository.UpdateAsync(processoSelecionado)
+                    processo = _mapper.Map<ProcessoRetornoDto>(await _repository.UpdateAsync(processoSelecionado))
                 };
             }
             catch (Exception)
@@ -68,7 +71,7 @@ namespace Api.Processos.Service
                 return new ProcessoResultadoDto
                 {
                     msg = "Sucesso",
-                    processo = await _repository.UpdateAsync(processoSelecionado)
+                    processo = _mapper.Map<ProcessoRetornoDto>(await _repository.UpdateAsync(processoSelecionado))
                 };
             }
             catch (Exception)
@@ -109,7 +112,7 @@ namespace Api.Processos.Service
                 return new ProcessoResultadoDto
                 {
                     msg = "Sucesso",
-                    processo = resultado
+                    processo = _mapper.Map<ProcessoRetornoDto>(resultado)
                 };
             }
             catch (Exception)
@@ -150,7 +153,7 @@ namespace Api.Processos.Service
                 return new ProcessoResultadoDto
                 {
                     msg = "Sucesso",
-                    processo = await _repository.UpdateAsync(processoSelecionado)
+                    processo = _mapper.Map<ProcessoRetornoDto>(await _repository.UpdateAsync(processoSelecionado))
                 };
 
 
@@ -161,11 +164,11 @@ namespace Api.Processos.Service
             }
         }
 
-        public async Task<Processo> ObterPorId(int id)
+        public async Task<ProcessoRetornoDto> ObterPorNumeroProcesso(string numeroProcesso)
         {
             try
             {
-                return await _repository.SelectAsync(id);
+                return _mapper.Map<ProcessoRetornoDto>(await _processosRepository.BuscarPorNumeroProcesso(numeroProcesso));
             }
             catch (Exception)
             {
@@ -173,24 +176,12 @@ namespace Api.Processos.Service
             }
         }
 
-        public async Task<Processo> ObterPorNumeroProcesso(string numeroProcesso)
-        {
-            try
-            {
-                return await _processosRepository.BuscarPorNumeroProcesso(numeroProcesso);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public async Task<IEnumerable<Processo>> ObterTodosProcessos()
+        public async Task<IEnumerable<ProcessoRetornoDto>> ObterTodosProcessos()
         {
             try
             {
                 IEnumerable<Processo> processos = await _repository.SelectAsync();
-                return processos.OrderByDescending(x => x.NumeroProcesso);
+                return _mapper.Map<IEnumerable<ProcessoRetornoDto>>(processos.OrderByDescending(x => x.NumeroProcesso));
             }
             catch (Exception)
             {

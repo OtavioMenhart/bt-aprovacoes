@@ -11,13 +11,13 @@ namespace Api.Service.Teste.Processos
 {
     public class QuandoForExecutadoCriarProcesso : BaseProcessosTestes
     {
-        private IProcessosService _service;
-        private Mock<IProcessosService> _serviceMock;
+        private IProcessoService _service;
+        private Mock<IProcessoService> _serviceMock;
 
         [Fact(DisplayName = "É possível criar processo")]
         public async Task E_Possivel_Criar_Processo()
         {
-            _serviceMock = new Mock<IProcessosService>();
+            _serviceMock = new Mock<IProcessoService>();
             _serviceMock.Setup(x => x.CriarProcesso(processoDtoCreate)).ReturnsAsync(resultadoDtoSucesso);
             _service = _serviceMock.Object;
 

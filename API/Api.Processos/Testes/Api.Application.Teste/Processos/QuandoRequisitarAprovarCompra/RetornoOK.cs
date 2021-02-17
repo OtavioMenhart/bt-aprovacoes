@@ -1,12 +1,9 @@
 ﻿using Api.Processos.Controllers;
 using Api.Processos.Domain.Dtos;
-using Api.Processos.Domain.Entities;
 using Api.Processos.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -14,12 +11,12 @@ namespace Api.Application.Teste.Processos.QuandoRequisitarAprovarCompra
 {
     public class RetornoOK
     {
-        private ProcessosController _controller;
+        private ProcessoController _controller;
 
         [Fact(DisplayName = "É possível Realizar o AprovarCompra.")]
         public async Task E_Possivel_Invocar_a_Controller_AprovarCompra()
         {
-            var serviceMock = new Mock<IProcessosService>();
+            var serviceMock = new Mock<IProcessoService>();
             var nomeReclamente = Faker.Name.FullName();
             var escritorio = Faker.Company.Name();
             var numeroProcesso = Faker.RandomNumber.Next().ToString();
@@ -28,9 +25,8 @@ namespace Api.Application.Teste.Processos.QuandoRequisitarAprovarCompra
                 new ProcessoResultadoDto
                 {
                     msg = "Sucesso",
-                    processo = new Processo
+                    processo = new ProcessoRetornoDto
                     {
-                        Id = Faker.RandomNumber.Next(),
                         DataInclusao = DateTime.UtcNow,
                         Escritorio = escritorio,
                         FlgAprovado = false,
@@ -42,7 +38,7 @@ namespace Api.Application.Teste.Processos.QuandoRequisitarAprovarCompra
                 }
             );
 
-            _controller = new ProcessosController(serviceMock.Object);
+            _controller = new ProcessoController(serviceMock.Object);
 
             var processoDtoUpdate = new CompraProcessoDto
             {

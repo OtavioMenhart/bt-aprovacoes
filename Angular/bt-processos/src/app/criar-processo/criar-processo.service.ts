@@ -19,6 +19,6 @@ export class CriarProcessoService {
   }
 
   criarProcesso(processoCriado: ProcessoInsertEdit): Observable<ProcessoResultado>{
-    return this.http.post<ProcessoResultado>(`${URL_API}/Processos/CriarProcesso`, JSON.stringify(processoCriado), this.httpOptions).pipe(catchError(ErrorHandler.handleError))
+    return this.http.post<ProcessoResultado>(`${URL_API}/Processo/CriarProcesso`, JSON.stringify(processoCriado), this.httpOptions).pipe(catchError(ErrorHandler.handleError))
   }
 }

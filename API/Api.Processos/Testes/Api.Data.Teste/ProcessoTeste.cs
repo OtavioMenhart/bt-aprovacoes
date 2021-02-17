@@ -23,7 +23,7 @@ namespace Api.Data.Teste
         {
             using (var context = _serviceProvider.GetService<DataContext>())
             {
-                ProcessosRepository _repositorio = new ProcessosRepository(context);
+                ProcessoRepository _repositorio = new ProcessoRepository(context);
                 Processo entity = new Processo
                 {
                     DataInclusao = DateTime.UtcNow,

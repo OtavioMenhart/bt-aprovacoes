@@ -16,7 +16,7 @@
     
 </form>
 
-<table *ngIf="processos" id="tblProcessos" datatable [dtOptions]="dtOptions" class="row-border hover">
+<table *ngIf="show" id="tblProcessos" datatable [dtOptions]="dtOptions" class="row-border hover">
     <thead>
         <tr>
             
@@ -43,7 +43,7 @@
             <td>{{p.dataInclusao | mask: '9999-99-99 99:99'}}</td>
             <td>{{p.flgAtivo ? "Ativo" : "Inativo"}}</td>
             <td>{{p.flgAprovado ? "Comprado" : "Pendente"}}</td>
-            <td>{{p.dataCompra | mask: '9999-99-99 99:99:99'}}</td>
+            <td>{{p.dataCompra | mask: '9999-99-99 99:99'}}</td>
             <td *ngIf="p.flgAprovado">
                 Processo comprado
             </td>

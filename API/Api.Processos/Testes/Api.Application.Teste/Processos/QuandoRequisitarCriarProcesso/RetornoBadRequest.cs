@@ -1,12 +1,9 @@
 ﻿using Api.Processos.Controllers;
 using Api.Processos.Domain.Dtos;
-using Api.Processos.Domain.Entities;
 using Api.Processos.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -14,18 +11,17 @@ namespace Api.Application.Teste.Processos.QuandoRequisitarCriarProcesso
 {
     public class RetornoBadRequest
     {
-        private ProcessosController _controller;
+        private ProcessoController _controller;
         [Fact(DisplayName = "Foi possível testar bad request.")]
         public async Task E_Possivel_Invocar_a_Controller_Create()
         {
-            var serviceMock = new Mock<IProcessosService>();
+            var serviceMock = new Mock<IProcessoService>();
 
             serviceMock.Setup(x => x.CriarProcesso(It.IsAny<ProcessoDto>())).ReturnsAsync(new ProcessoResultadoDto
             {
                 msg = "Sucesso",
-                processo = new Processo
+                processo = new ProcessoRetornoDto
                 {
-                    Id = Faker.RandomNumber.Next(),
                     DataInclusao = DateTime.UtcNow,
                     Escritorio = Faker.Company.Name(),
                     FlgAprovado = false,
@@ -36,7 +32,7 @@ namespace Api.Application.Teste.Processos.QuandoRequisitarCriarProcesso
                 }
             });
 
-            _controller = new ProcessosController(serviceMock.Object);
+            _controller = new ProcessoController(serviceMock.Object);
             _controller.ModelState.AddModelError("NumeroProcesso", "É um Campo Obrigatório");
 
             Mock<IUrlHelper> url = new Mock<IUrlHelper>();

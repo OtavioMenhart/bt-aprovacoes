@@ -1,8 +1,6 @@
 ﻿using Api.Processos.Domain.Dtos;
-using Api.Processos.Domain.Entities;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Api.Service.Teste.Processos
 {
@@ -19,8 +17,8 @@ namespace Api.Service.Teste.Processos
         public ProcessoResultadoDto resultadoDtoSucessoUpdate;
         public ProcessoResultadoDto resultadoDtoSucesso;
         public ProcessoResultadoDto resultadoDtoFalha;
-        public Processo tblProcessos;
-        public List<Processo> listaProcessos = new List<Processo>();
+        public ProcessoRetornoDto tblProcessos;
+        public List<ProcessoRetornoDto> listaProcessos = new List<ProcessoRetornoDto>();
         public CompraProcessoDto compraProcesso;
         public ProcessoResultadoDto resultadoCompraDto;
         public StatusProcessoDto statusProcesso;
@@ -36,15 +34,14 @@ namespace Api.Service.Teste.Processos
 
             for (int i = 0; i < 10; i++)
             {
-                listaProcessos.Add(new Processo
+                listaProcessos.Add(new ProcessoRetornoDto
                 {
                     Escritorio = Faker.Company.Name(),
                     NomeReclamante = Faker.Name.FullName(),
                     NumeroProcesso = Faker.RandomNumber.Next().ToString(),
                     ValorCausa = Faker.RandomNumber.Next(),
                     DataInclusao = DateTime.UtcNow,
-                    FlgAtivo = true,
-                    Id = Faker.RandomNumber.Next()
+                    FlgAtivo = true
                 });
             }
 
@@ -66,21 +63,19 @@ namespace Api.Service.Teste.Processos
             resultadoDtoSucessoUpdate = new ProcessoResultadoDto
             {
                 msg = "Sucesso",
-                processo = new Processo
+                processo = new ProcessoRetornoDto
                 {
                     Escritorio = processoDtoUpdate.Escritorio,
                     NomeReclamante = processoDtoUpdate.NomeReclamante,
                     NumeroProcesso = processoDtoUpdate.NumeroProcesso,
                     ValorCausa = processoDtoUpdate.ValorCausa,
                     DataInclusao = DateTime.UtcNow,
-                    DataEdicao = DateTime.UtcNow,
                     FlgAtivo = true
                 }
             };
 
-            tblProcessos = new Processo
+            tblProcessos = new ProcessoRetornoDto
             {
-                Id = Id,
                 DataInclusao = DateTime.UtcNow,
                 Escritorio = Escritorio,
                 FlgAprovado = false,
@@ -106,7 +101,7 @@ namespace Api.Service.Teste.Processos
             resultadoCompraDto = new ProcessoResultadoDto
             {
                 msg = "Sucesso",
-                processo = new Processo
+                processo = new ProcessoRetornoDto
                 {
                     DataInclusao = DateTime.UtcNow,
                     Escritorio = Escritorio,
@@ -128,7 +123,7 @@ namespace Api.Service.Teste.Processos
             resultadoStatusDto = new ProcessoResultadoDto
             {
                 msg = "Sucesso",
-                processo = new Processo
+                processo = new ProcessoRetornoDto
                 {
                     DataInclusao = DateTime.UtcNow,
                     Escritorio = Escritorio,

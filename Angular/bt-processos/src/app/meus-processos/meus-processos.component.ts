@@ -10,6 +10,7 @@ import { ValidacaoService } from '../validacoes/processo.validacao.service';
 import { ProcessoInsertEdit } from '../modelos/processoInsertEdit.model';
 import { PesquisaProcesso } from '../modelos/pesquisaProcesso.model';
 import swal from 'sweetalert';
+import { Subject } from 'rxjs';
 
 declare var $: any
 
@@ -33,6 +34,8 @@ export class MeusProcessosComponent implements OnInit {
   resultadoValidacao: ResultadoValidacao
 
   dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
+  show: boolean
 
   constructor(private meusProcessosService: MeusProcessosService, private formBuilder: FormBuilder, private validacaoService: ValidacaoService) { }
 
@@ -51,19 +54,32 @@ export class MeusProcessosComponent implements OnInit {
     this.carregarProcessos()    
   }
 
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
+  }
+
   opcoesDatatable(){
     this.dtOptions = {
-      destroy: true,
-      processing: true
+      // destroy: true,
+      processing: true,
+      pageLength: 5,
+      lengthMenu: [5, 10, 20, 50, 100, 200, 500],
     }
   }
 
   carregarProcessos() {
+    this.show = false
+    this.processos = []
     this.opcoesDatatable()
-    this.meusProcessosService.selecionarTodosProcessos().toPromise().then(processos => 
-      {
-        this.processos = processos        
-      })
+
+      this.meusProcessosService.selecionarTodosProcessos().toPromise().then(processos => 
+        {
+          this.processos = processos;  
+          this.show = true
+        })
+
+    
   }
 
   aprovarProcesso(numeroProcesso: string, status: boolean){

@@ -10,13 +10,13 @@ namespace Api.Service.Teste.Processos
 {
     public class QuandoForExecutadoEditarProcesso : BaseProcessosTestes
     {
-        private IProcessosService _service;
-        private Mock<IProcessosService> _serviceMock;
+        private IProcessoService _service;
+        private Mock<IProcessoService> _serviceMock;
 
         [Fact(DisplayName = "É possível editar processo")]
         public async Task E_Possivel_Editar_Processo()
         {
-            _serviceMock = new Mock<IProcessosService>();
+            _serviceMock = new Mock<IProcessoService>();
             _serviceMock.Setup(x => x.CriarProcesso(processoDtoCreate)).ReturnsAsync(resultadoDtoSucesso);
             _service = _serviceMock.Object;
 
@@ -25,7 +25,7 @@ namespace Api.Service.Teste.Processos
             Assert.Equal(processoDtoCreate.NomeReclamante, result.processo.NomeReclamante);
             Assert.Equal(processoDtoCreate.NumeroProcesso, result.processo.NumeroProcesso);
 
-            _serviceMock = new Mock<IProcessosService>();
+            _serviceMock = new Mock<IProcessoService>();
             _serviceMock.Setup(x => x.EditarProcesso(processoDtoUpdate)).ReturnsAsync(resultadoDtoSucessoUpdate);
             _service = _serviceMock.Object;
 

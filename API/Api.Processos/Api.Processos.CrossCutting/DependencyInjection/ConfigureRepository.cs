@@ -16,7 +16,7 @@ namespace Api.Processos.CrossCutting.DependencyInjection
                 options => options.UseSqlServer(ConfiguracaoBD.conexaoBd)
                 );
             serviceCollection.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
-            serviceCollection.AddScoped<IProcessosRepository, ProcessosRepository>();
+            serviceCollection.AddScoped<IProcessoRepository, ProcessoRepository>();
         }
     }
 }

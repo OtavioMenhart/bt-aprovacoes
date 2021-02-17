@@ -8,7 +8,7 @@ namespace Api.Processos.CrossCutting.DependencyInjection
     {
         public static void ConfigureDependenciesService(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddTransient<IProcessosService, ProcessosService>();
+            serviceCollection.AddTransient<IProcessoService, ProcessoService>();
         }
     }
 }

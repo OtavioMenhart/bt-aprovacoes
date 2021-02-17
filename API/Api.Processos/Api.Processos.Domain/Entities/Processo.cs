@@ -8,8 +8,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Processos.Domain.Entities
 {
-    [Table("Tbl_Processos")]
-    public partial class TblProcessos
+    [Table("Processo")]
+    public partial class Processo
     {
         [Key]
         [Column("Id")]

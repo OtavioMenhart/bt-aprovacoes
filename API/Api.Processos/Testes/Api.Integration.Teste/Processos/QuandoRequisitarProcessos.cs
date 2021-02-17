@@ -39,13 +39,13 @@ namespace Api.Integration.Teste.Processos
             Assert.Equal(_numeroProcesso, registroPost.processo.NumeroProcesso);
 
             string jsonResult = "";
-            TblProcessos registroSelecionado = null;
+            Processo registroSelecionado = null;
 
             //ObterPorId
             response = await client.GetAsync($"{hostApi}Processos/ObterPorId/{registroPost.processo.Id}");
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             jsonResult = await response.Content.ReadAsStringAsync();
-            registroSelecionado = JsonConvert.DeserializeObject<TblProcessos>(jsonResult);
+            registroSelecionado = JsonConvert.DeserializeObject<Processo>(jsonResult);
             Assert.NotNull(registroSelecionado);
             Assert.Equal(registroSelecionado.NumeroProcesso, registroPost.processo.NumeroProcesso);
             Assert.Equal(registroSelecionado.NomeReclamante, registroPost.processo.NomeReclamante);
@@ -58,7 +58,7 @@ namespace Api.Integration.Teste.Processos
             response = await client.GetAsync($"{hostApi}Processos/ObterPorNumeroProcesso/{registroPost.processo.NumeroProcesso}");
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             jsonResult = await response.Content.ReadAsStringAsync();
-            registroSelecionado = JsonConvert.DeserializeObject<TblProcessos>(jsonResult);
+            registroSelecionado = JsonConvert.DeserializeObject<Processo>(jsonResult);
             Assert.NotNull(registroSelecionado);
             Assert.Equal(registroSelecionado.NumeroProcesso, registroPost.processo.NumeroProcesso);
             Assert.Equal(registroSelecionado.NomeReclamante, registroPost.processo.NomeReclamante);
@@ -71,7 +71,7 @@ namespace Api.Integration.Teste.Processos
             response = await client.GetAsync($"{hostApi}Processos/ObterTodosProcessos");
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             jsonResult = await response.Content.ReadAsStringAsync();
-            var registros = JsonConvert.DeserializeObject<List<TblProcessos>>(jsonResult);
+            var registros = JsonConvert.DeserializeObject<List<Processo>>(jsonResult);
             Assert.NotNull(registros);
             Assert.True(registros.Count > 0);
 

@@ -8,12 +8,12 @@ namespace Api.Processos.Domain.Interfaces.Services
     public interface IProcessosService
     {
         Task<ProcessoResultadoDto> CriarProcesso(ProcessoDto aprovacao);
-        Task<TblProcessos> ObterPorId(int id);
+        Task<Processo> ObterPorId(int id);
         Task<ProcessoResultadoDto> EditarProcesso(ProcessoDto edicao);
         Task<object> Validacao(ProcessoDto processo, bool validaNumeroProcessoExistente);
         Task<ProcessoResultadoDto> AlterarStatusProcesso(StatusProcessoDto statusProcesso);
-        Task<IEnumerable<TblProcessos>> ObterTodosProcessos();
+        Task<IEnumerable<Processo>> ObterTodosProcessos();
         Task<ProcessoResultadoDto> AprovarCompra(CompraProcessoDto compraProcesso);
-        Task<TblProcessos> ObterPorNumeroProcesso(string numeroProcesso);
+        Task<Processo> ObterPorNumeroProcesso(string numeroProcesso);
     }
 }

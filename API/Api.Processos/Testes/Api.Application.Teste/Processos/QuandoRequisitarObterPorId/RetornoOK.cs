@@ -23,7 +23,7 @@ namespace Api.Application.Teste.Processos.QuandoRequisitarObterPorId
             var serviceMock = new Mock<IProcessosService>();
 
             serviceMock.Setup(m => m.ObterPorId(It.IsAny<int>())).ReturnsAsync(
-                 new TblProcessos
+                 new Processo
                  {
                      Id = Faker.RandomNumber.Next(),
                      DataInclusao = DateTime.UtcNow,
@@ -39,7 +39,7 @@ namespace Api.Application.Teste.Processos.QuandoRequisitarObterPorId
             _controller = new ProcessosController(serviceMock.Object);
             var result = await _controller.ObterPorId(Faker.RandomNumber.Next());
             Assert.True(result is OkObjectResult);
-            var resultValue = ((OkObjectResult)result).Value as TblProcessos;
+            var resultValue = ((OkObjectResult)result).Value as Processo;
             Assert.NotNull(resultValue);
             Assert.Equal(nomeReclamante, resultValue.NomeReclamante);
             Assert.Equal(numeroProcesso, resultValue.NumeroProcesso);

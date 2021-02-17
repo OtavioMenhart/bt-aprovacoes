@@ -24,7 +24,7 @@ namespace Api.Data.Teste
             using (var context = _serviceProvider.GetService<DataContext>())
             {
                 ProcessosRepository _repositorio = new ProcessosRepository(context);
-                TblProcessos entity = new TblProcessos
+                Processo entity = new Processo
                 {
                     DataInclusao = DateTime.UtcNow,
                     Escritorio = Faker.Company.Name(),

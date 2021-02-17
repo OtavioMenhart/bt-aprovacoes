@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace Api.Processos.Domain.Interfaces.Repositories
 {
-    public interface IProcessosRepository : IRepository<TblProcessos>
+    public interface IProcessosRepository : IRepository<Processo>
     {
-        Task<TblProcessos> BuscarPorNumeroProcesso(string numeroProcesso);
+        Task<Processo> BuscarPorNumeroProcesso(string numeroProcesso);
     }
 }

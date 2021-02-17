@@ -33,7 +33,7 @@ namespace Api.Processos.Controllers
             }
             try
             {
-                IEnumerable<TblProcessos> processos = await _service.ObterTodosProcessos();
+                IEnumerable<Processo> processos = await _service.ObterTodosProcessos();
                 if (processos.Count() > 0)
                     return Ok(processos);
                 return NoContent();
@@ -59,7 +59,7 @@ namespace Api.Processos.Controllers
             }
             try
             {
-                TblProcessos processo = await _service.ObterPorId(id);
+                Processo processo = await _service.ObterPorId(id);
                 if (processo != null)
                     return Ok(processo);
                 return NoContent();
@@ -85,7 +85,7 @@ namespace Api.Processos.Controllers
             }
             try
             {
-                TblProcessos processo = await _service.ObterPorNumeroProcesso(numeroProcesso);
+                Processo processo = await _service.ObterPorNumeroProcesso(numeroProcesso);
                 if (processo != null)
                     return Ok(processo);
                 return NoContent();

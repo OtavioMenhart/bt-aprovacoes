@@ -15,10 +15,10 @@ namespace Api.Processos.Service
 {
     public class ProcessosService : IProcessosService
     {
-        private IRepository<TblProcessos> _repository;
+        private IRepository<Processo> _repository;
         private IProcessosRepository _processosRepository;
 
-        public ProcessosService(IRepository<TblProcessos> repository, IProcessosRepository ProcessosRepository)
+        public ProcessosService(IRepository<Processo> repository, IProcessosRepository ProcessosRepository)
         {
             _repository = repository;
             _processosRepository = ProcessosRepository;
@@ -28,7 +28,7 @@ namespace Api.Processos.Service
         {
             try
             {
-                TblProcessos processoSelecionado = await _processosRepository.BuscarPorNumeroProcesso(statusProcesso.NumeroProcesso);
+                Processo processoSelecionado = await _processosRepository.BuscarPorNumeroProcesso(statusProcesso.NumeroProcesso);
                 if (processoSelecionado is null)
                     return new ProcessoResultadoDto { msg = $"Processo {statusProcesso.NumeroProcesso} não localizado" };
                 if (processoSelecionado.FlgAprovado)
@@ -52,7 +52,7 @@ namespace Api.Processos.Service
         {
             try
             {
-                TblProcessos processoSelecionado = await _processosRepository.BuscarPorNumeroProcesso(compraProcesso.NumeroProcesso);
+                Processo processoSelecionado = await _processosRepository.BuscarPorNumeroProcesso(compraProcesso.NumeroProcesso);
                 if (processoSelecionado is null)
                     return new ProcessoResultadoDto { msg = $"Processo {compraProcesso.NumeroProcesso} não localizado" };
                 if (processoSelecionado.FlgAprovado)
@@ -95,7 +95,7 @@ namespace Api.Processos.Service
                 }
 
 
-                TblProcessos baseAprovacao = new TblProcessos
+                Processo baseAprovacao = new Processo
                 {
                     DataInclusao = DateTime.UtcNow,
                     Escritorio = processo.Escritorio,
@@ -105,7 +105,7 @@ namespace Api.Processos.Service
                     NumeroProcesso = processo.NumeroProcesso,
                     ValorCausa = processo.ValorCausa
                 };
-                TblProcessos resultado = await _repository.InsertAsync(baseAprovacao);
+                Processo resultado = await _repository.InsertAsync(baseAprovacao);
                 return new ProcessoResultadoDto
                 {
                     msg = "Sucesso",
@@ -122,7 +122,7 @@ namespace Api.Processos.Service
         {
             try
             {
-                TblProcessos processoSelecionado = await _processosRepository.BuscarPorNumeroProcesso(edicao.NumeroProcesso);
+                Processo processoSelecionado = await _processosRepository.BuscarPorNumeroProcesso(edicao.NumeroProcesso);
                 if (processoSelecionado is null)
                     return new ProcessoResultadoDto { msg = $"Processo {edicao.NumeroProcesso} não localizado" };
                 if (processoSelecionado.FlgAprovado)
@@ -161,7 +161,7 @@ namespace Api.Processos.Service
             }
         }
 
-        public async Task<TblProcessos> ObterPorId(int id)
+        public async Task<Processo> ObterPorId(int id)
         {
             try
             {
@@ -173,7 +173,7 @@ namespace Api.Processos.Service
             }
         }
 
-        public async Task<TblProcessos> ObterPorNumeroProcesso(string numeroProcesso)
+        public async Task<Processo> ObterPorNumeroProcesso(string numeroProcesso)
         {
             try
             {
@@ -185,11 +185,11 @@ namespace Api.Processos.Service
             }
         }
 
-        public async Task<IEnumerable<TblProcessos>> ObterTodosProcessos()
+        public async Task<IEnumerable<Processo>> ObterTodosProcessos()
         {
             try
             {
-                IEnumerable<TblProcessos> processos = await _repository.SelectAsync();
+                IEnumerable<Processo> processos = await _repository.SelectAsync();
                 return processos.OrderByDescending(x => x.NumeroProcesso);
             }
             catch (Exception)

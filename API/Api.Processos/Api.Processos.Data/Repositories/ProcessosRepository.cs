@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace Api.Processos.Data.Repositories
 {
-    public class ProcessosRepository : BaseRepository<TblProcessos>, IProcessosRepository
+    public class ProcessosRepository : BaseRepository<Processo>, IProcessosRepository
     {
-        private DbSet<TblProcessos> _dataSet;
+        private DbSet<Processo> _dataSet;
         public ProcessosRepository(DataContext context) : base(context)
         {
-            _dataSet = context.Set<TblProcessos>();
+            _dataSet = context.Set<Processo>();
         }
 
-        public async Task<TblProcessos> BuscarPorNumeroProcesso(string numeroProcesso)
+        public async Task<Processo> BuscarPorNumeroProcesso(string numeroProcesso)
         {
             try
             {

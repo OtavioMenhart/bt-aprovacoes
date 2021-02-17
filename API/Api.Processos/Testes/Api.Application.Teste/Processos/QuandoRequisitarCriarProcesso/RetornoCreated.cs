@@ -25,7 +25,7 @@ namespace Api.Application.Teste.Processos.QuandoRequisitarCriarProcesso
             serviceMock.Setup(x => x.CriarProcesso(It.IsAny<ProcessoDto>())).ReturnsAsync(new ProcessoResultadoDto
             {
                 msg = "Sucesso",
-                processo = new TblProcessos
+                processo = new Processo
                 {
                     Id = Faker.RandomNumber.Next(),
                     DataInclusao = DateTime.UtcNow,

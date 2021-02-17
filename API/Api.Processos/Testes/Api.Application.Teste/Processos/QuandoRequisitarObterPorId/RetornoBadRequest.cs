@@ -23,7 +23,7 @@ namespace Api.Application.Teste.Processos.QuandoRequisitarObterPorId
             string numeroProcesso = Faker.RandomNumber.Next().ToString();
 
             serviceMock.Setup(m => m.ObterPorId(It.IsAny<int>())).ReturnsAsync(
-                 new TblProcessos
+                 new Processo
                  {
                      Id = Faker.RandomNumber.Next(),
                      DataInclusao = DateTime.UtcNow,

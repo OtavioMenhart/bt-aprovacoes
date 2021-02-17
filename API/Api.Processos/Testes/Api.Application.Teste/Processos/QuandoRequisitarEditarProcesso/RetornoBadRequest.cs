@@ -28,7 +28,7 @@ namespace Api.Application.Teste.Processos.QuandoRequisitarEditarProcesso
                 new ProcessoResultadoDto
                 {
                     msg = "Sucesso",
-                    processo = new TblProcessos
+                    processo = new Processo
                     {
                         Id = Faker.RandomNumber.Next(),
                         DataInclusao = DateTime.UtcNow,

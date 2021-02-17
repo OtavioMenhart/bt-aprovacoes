@@ -45,7 +45,7 @@
             <td>{{p.flgAprovado ? "Comprado" : "Pendente"}}</td>
             <td>{{p.dataCompra | mask: '9999-99-99 99:99:99'}}</td>
             <td *ngIf="p.flgAprovado">
-                Processo comprado, não pode ser editado
+                Processo comprado
             </td>
 
             <td *ngIf="!p.flgAprovado">
@@ -56,7 +56,7 @@
             </td>
 
             <td *ngIf="p.flgAprovado">
-                Processo comprado, status não pode ser alterado
+                Processo comprado
             </td>
 
             <td *ngIf="!p.flgAprovado && p.flgAtivo">

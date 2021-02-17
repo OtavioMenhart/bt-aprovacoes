@@ -1,4 +1,5 @@
-﻿using Api.Processos.Domain.Entities;
+﻿using Api.Processos.Domain;
+using Api.Processos.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
@@ -18,13 +19,21 @@ namespace Api.Processos.Data.Context
         {
         }
 
-        public virtual DbSet<TblProcessos> TblProcessos { get; set; }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(ConfiguracaoBD.conexaoBd);
+            }
+        }
 
+        public virtual DbSet<Processo> TblProcessos { get; set; }
 
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TblProcessos>(entity =>
+            modelBuilder.Entity<Processo>(entity =>
             {
                 entity.HasIndex(e => e.NumeroProcesso)
                     .HasName("UC_NumeroProcesso")

@@ -54,9 +54,7 @@ export class MeusProcessosComponent implements OnInit {
   opcoesDatatable(){
     this.dtOptions = {
       destroy: true,
-      pageLength: 5,
-      processing: true,
-      lengthMenu: [5, 10, 20, 50, 100, 200, 500]
+      processing: true
     }
   }
 
@@ -90,6 +88,7 @@ export class MeusProcessosComponent implements OnInit {
     }
 
     this.meusProcessosService.alterarStatusProcesso(this.alteracaoStatus).toPromise().then(resultado =>{
+      
       this.processoResultado = resultado
       if(this.processoResultado.processo != null){
         this.carregarProcessos()
@@ -110,8 +109,9 @@ export class MeusProcessosComponent implements OnInit {
   }
 
   editarProcesso(){
+    
     this.processoEdicao = Object.assign(new ProcessoInsertEdit(), this.processoForm.value)
-    this.processoEdicao.ValorCausa = Number(this.processoEdicao.ValorCausa)
+    this.processoEdicao.ValorCausa = Number(this.processoEdicao.ValorCausa.toString().replace(",", "."))
     
     this.resultadoValidacao = this.validacaoService.validar(this.processoEdicao)
 

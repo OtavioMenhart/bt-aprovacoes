@@ -19,8 +19,8 @@ namespace Api.Service.Teste.Processos
         public ProcessoResultadoDto resultadoDtoSucessoUpdate;
         public ProcessoResultadoDto resultadoDtoSucesso;
         public ProcessoResultadoDto resultadoDtoFalha;
-        public TblProcessos tblProcessos;
-        public List<TblProcessos> listaProcessos = new List<TblProcessos>();
+        public Processo tblProcessos;
+        public List<Processo> listaProcessos = new List<Processo>();
         public CompraProcessoDto compraProcesso;
         public ProcessoResultadoDto resultadoCompraDto;
         public StatusProcessoDto statusProcesso;
@@ -36,7 +36,7 @@ namespace Api.Service.Teste.Processos
 
             for (int i = 0; i < 10; i++)
             {
-                listaProcessos.Add(new TblProcessos
+                listaProcessos.Add(new Processo
                 {
                     Escritorio = Faker.Company.Name(),
                     NomeReclamante = Faker.Name.FullName(),
@@ -66,7 +66,7 @@ namespace Api.Service.Teste.Processos
             resultadoDtoSucessoUpdate = new ProcessoResultadoDto
             {
                 msg = "Sucesso",
-                processo = new TblProcessos
+                processo = new Processo
                 {
                     Escritorio = processoDtoUpdate.Escritorio,
                     NomeReclamante = processoDtoUpdate.NomeReclamante,
@@ -78,7 +78,7 @@ namespace Api.Service.Teste.Processos
                 }
             };
 
-            tblProcessos = new TblProcessos
+            tblProcessos = new Processo
             {
                 Id = Id,
                 DataInclusao = DateTime.UtcNow,
@@ -106,7 +106,7 @@ namespace Api.Service.Teste.Processos
             resultadoCompraDto = new ProcessoResultadoDto
             {
                 msg = "Sucesso",
-                processo = new TblProcessos
+                processo = new Processo
                 {
                     DataInclusao = DateTime.UtcNow,
                     Escritorio = Escritorio,
@@ -128,7 +128,7 @@ namespace Api.Service.Teste.Processos
             resultadoStatusDto = new ProcessoResultadoDto
             {
                 msg = "Sucesso",
-                processo = new TblProcessos
+                processo = new Processo
                 {
                     DataInclusao = DateTime.UtcNow,
                     Escritorio = Escritorio,

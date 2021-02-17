@@ -21,9 +21,9 @@ namespace Api.Application.Teste.Processos.QuandoRequisitarObterTodosProcessos
         {
             var serviceMock = new Mock<IProcessosService>();
             serviceMock.Setup(m => m.ObterTodosProcessos()).ReturnsAsync(
-                 new List<TblProcessos>
+                 new List<Processo>
                  {
-                    new TblProcessos
+                    new Processo
                     {
                         Id = Faker.RandomNumber.Next(),
                         DataInclusao = DateTime.UtcNow,
@@ -34,7 +34,7 @@ namespace Api.Application.Teste.Processos.QuandoRequisitarObterTodosProcessos
                         NumeroProcesso = Faker.RandomNumber.Next().ToString(),
                         ValorCausa = Faker.RandomNumber.Next()
                     },
-                    new TblProcessos
+                    new Processo
                     {
                         Id = Faker.RandomNumber.Next(),
                         DataInclusao = DateTime.UtcNow,
@@ -51,7 +51,7 @@ namespace Api.Application.Teste.Processos.QuandoRequisitarObterTodosProcessos
             var result = await _controller.ObterTodosProcessos();
             Assert.True(result is OkObjectResult);
 
-            var resultValue = ((OkObjectResult)result).Value as IEnumerable<TblProcessos>;
+            var resultValue = ((OkObjectResult)result).Value as IEnumerable<Processo>;
             Assert.True(resultValue.Count() == 2);
         }
     }
